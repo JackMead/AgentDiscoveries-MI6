@@ -7,6 +7,7 @@ import org.softwire.training.db.daos.UsersDao;
 import org.softwire.training.db.daos.searchcriteria.FromTimeSearchCriterion;
 import org.softwire.training.db.daos.searchcriteria.RegionIdSearchCriterion;
 import org.softwire.training.db.daos.searchcriteria.ReportSearchCriterion;
+import org.softwire.training.db.daos.searchcriteria.AgentIdSearchCriterion;
 import org.softwire.training.db.daos.searchcriteria.UserIdSearchCriterion;
 import org.softwire.training.models.RegionSummaryReport;
 import spark.QueryParamsMap;
@@ -36,6 +37,8 @@ public class RegionSummaryReportsRoutes extends ReportsRoutesBase<RegionSummaryR
     protected RegionSummaryReport validateThenMap(RegionSummaryReportApiModel apiModel) {
         // Ignore any supplied report time
         LocalDateTime reportTimeUtc = LocalDateTime.now(ZoneOffset.UTC);
+
+        validateStatusCode(apiModel.getStatus());
 
         RegionSummaryReport model = new RegionSummaryReport();
         model.setAgentId(apiModel.getAgentId());
@@ -68,6 +71,10 @@ public class RegionSummaryReportsRoutes extends ReportsRoutesBase<RegionSummaryR
 
         if (!isNullOrEmpty(queryMap.get("regionId").value())) {
             apiReportSearchCriteria.add(new RegionIdSearchCriterion(queryMap.get("regionId").integerValue()));
+        }
+
+        if (!isNullOrEmpty(queryMap.get("agentId").value())) {
+            apiReportSearchCriteria.add(new AgentIdSearchCriterion(queryMap.get("agentId").integerValue()));
         }
 
         if (!isNullOrEmpty(queryMap.get("userId").value())) {
