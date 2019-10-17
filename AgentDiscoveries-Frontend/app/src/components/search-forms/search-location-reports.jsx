@@ -15,8 +15,8 @@ export default class LocationReportsSearch extends React.Component {
             callSign: '',
             reportTitle: '',
             locationId: '',
-            fromTime: '',
-            toTime: '',
+            fromTime: moment().subtract(7, 'days').format('YYYY-MM-DD'),
+            toTime: moment().format('YYYY-MM-DD'),
             locations: [],
             results: [],
             message: {}
