@@ -30,6 +30,9 @@ public class PermissionsVerifier {
     public void verifyIsAdminOrRelevantAgent(Request req, int relevantAgentId) {
         verifyUser(req, user -> user.isAdmin() || (user.getAgentId() != null && user.getAgentId() == relevantAgentId));
     }
+    public void verifyIsAdminOrAgent(Request req) {
+        verifyUser(req, user -> user.isAdmin() || (user.getAgentId() != null));
+    }
 
     public void verifyIsAgent(Request req) {
         verifyUser(req, user -> user.getAgentId() != null);

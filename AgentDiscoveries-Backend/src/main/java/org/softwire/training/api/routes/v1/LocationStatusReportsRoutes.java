@@ -69,13 +69,11 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
     private LocationStatusReportApiModel mapReportAndTimezoneToApiModel(LocationStatusReport model, String timeZone) {
         LocationStatusReportApiModel apiModel = new LocationStatusReportApiModel();
 
-        ZoneId locationTimeZone = ZoneId.of(timeZone);
-
         apiModel.setReportId(model.getReportId());
         apiModel.setAgentId(model.getAgentId());
         apiModel.setLocationId(model.getLocationId());
         apiModel.setStatus(model.getStatus());
-        apiModel.setReportTime(model.getReportTime().atZone(locationTimeZone));
+        apiModel.setReportTime(model.getReportTime().atZone(ZoneOffset.UTC));
         apiModel.setReportBody(model.getReportBody());
         apiModel.setReportTitle(model.getReportTitle());
 
@@ -93,6 +91,10 @@ public class LocationStatusReportsRoutes extends ReportsRoutesBase<LocationStatu
 
         if (!isNullOrEmpty(queryMap.get("reportTitle").value())) {
             searchCriteria.add(new ReportTitleSearchCriterion(queryMap.get("reportTitle").value()));
+        }
+
+        if (!isNullOrEmpty(queryMap.get("agentId").value())) {
+            searchCriteria.add(new AgentIdSearchCriterion(queryMap.get("agentId").integerValue()));
         }
 
         if (!isNullOrEmpty(queryMap.get("locationId").value())) {
