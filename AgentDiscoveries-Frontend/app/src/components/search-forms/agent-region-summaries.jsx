@@ -9,9 +9,9 @@ export default class AgentRegionSummaries extends React.Component {
         super(props);
 
         this.state = {
-            results: [{}],
-            message: {}
+            results: [{}]
         };
+
     }
 
     componentDidMount(){

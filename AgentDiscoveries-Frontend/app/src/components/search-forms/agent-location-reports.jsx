@@ -9,8 +9,7 @@ export default class AgentLocationReports extends React.Component {
         super(props);
 
         this.state = {
-            results: [{}],
-            message: {}
+            results: [{}]
         };
     }
 

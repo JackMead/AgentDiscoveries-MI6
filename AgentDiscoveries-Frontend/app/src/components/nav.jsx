@@ -80,22 +80,22 @@ export default class NavigationBar extends React.Component {
     renderAdminOptions() {
         return (
             <Nav>
-                <NavDropdown eventKey={2} title='Admin' id='basic-nav-dropdown'>
-                    <MenuItem componentClass={Link} href='/admin/locations' to='/admin/locations' eventKey={2.1}>
+                <NavDropdown eventKey={"admin"} title='Admin' id='basic-nav-dropdown'>
+                    <MenuItem componentClass={Link} href='/admin/locations' to='/admin/locations' eventKey={"admin-locations"}>
                         Locations
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/admin/regions' to='/admin/regions' eventKey={2.2}>
+                    <MenuItem componentClass={Link} href='/admin/regions' to='/admin/regions' eventKey={"admin-regions"}>
                         Regions
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/admin/users' to='/admin/users' eventKey={2.3}>
+                    <MenuItem componentClass={Link} href='/admin/users' to='/admin/users' eventKey={"admin-users"}>
                         Users
                     </MenuItem>
                 </NavDropdown>
-                <NavDropdown eventKey={3} title='Search' id='basic-nav-dropdown'>
-                    <MenuItem componentClass={Link} href='/search/location' to='/search/location' eventKey={3.1}>
+                <NavDropdown eventKey={"search"} title='Search' id='basic-nav-dropdown'>
+                    <MenuItem componentClass={Link} href='/search/location' to='/search/location' eventKey={"search-location"}>
                         Location Reports
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/search/region' to='/search/region' eventKey={3.2}>
+                    <MenuItem componentClass={Link} href='/search/region' to='/search/region' eventKey={"search-region"}>
                         Region Summaries
                     </MenuItem>
                 </NavDropdown>
@@ -106,19 +106,19 @@ export default class NavigationBar extends React.Component {
     renderAgentOptions() {
         return (
             <React.Fragment>
-                <NavDropdown eventKey={4} title='Submit' id='basic-nav-dropdown'>
-                    <MenuItem componentClass={Link} href='/submit/location' to='/submit/location' eventKey={4.1}>
+                <NavDropdown eventKey={"submit"} title='Submit' id='basic-nav-dropdown'>
+                    <MenuItem componentClass={Link} href='/submit/location' to='/submit/location' eventKey={"submit-location"}>
                         Location Report
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/submit/region' to='/submit/region' eventKey={4.2}>
+                    <MenuItem componentClass={Link} href='/submit/region' to='/submit/region' eventKey={"submit-region"}>
                         Region Summary
                     </MenuItem>
                 </NavDropdown>
-                <NavDropdown eventKey={5} title='My Reports' id='basic-nav-dropdown'>
-                    <MenuItem componentClass={Link} href='/myreports/location' to='/myreports/location' eventKey={5.1}>
+                <NavDropdown eventKey={"my-reports"} title='My Reports' id='basic-nav-dropdown'>
+                    <MenuItem componentClass={Link} href='/myreports/location' to='/myreports/location' eventKey={"my-reports-location"}>
                          Location Reports
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/myreports/region' to='/myreports/region' eventKey={5.2}>
+                    <MenuItem componentClass={Link} href='/myreports/region' to='/myreports/region' eventKey={"my-reports-region"}>
                          Region Summaries
                     </MenuItem>
                 </NavDropdown>
@@ -130,7 +130,7 @@ export default class NavigationBar extends React.Component {
         return (
             <Navbar.Collapse>
                 <Nav pullRight>
-                    <NavItem componentClass={Link} href='/login' to='/login' eventKey={1}>
+                    <NavItem componentClass={Link} href='/login' to='/login' eventKey={"login"}>
                         Login
                     </NavItem>
                 </Nav>
