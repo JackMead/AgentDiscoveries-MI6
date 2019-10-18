@@ -50,12 +50,12 @@ export default class App extends React.Component {
                         <Route path='/admin/users' exact render={() => <Page><UsersTable/></Page>} />
                         <Route path='/admin/decode' exact render={() => <Page><DecodeEnemyMessageForm/></Page>} />
 
+                        <Route path='/myreports/location' render={() => <Page><AgentLocationReports /></Page>} />
+                        <Route path='/myreports/region' render={() => <Page><AgentRegionSummaries /></Page>} />
+
                         <Route path='/admin/locations/add' render={() => <Page><LocationForm/></Page>} />
                         <Route path='/admin/regions/add' render={() => <Page><RegionForm/></Page>} />
                         <Route path='/admin/users/add' render={() => <Page><UserForm/></Page>} />
-
-                        <Route path='/myreports/location' render={() => <Page><AgentLocationReports /></Page>} />
-                        <Route path='/myreports/region' render={() => <Page><AgentRegionSummaries /></Page>} />
 
                         <Route path='/admin/locations/edit/:id' render={props => <Page><LocationForm id={props.match.params.id} /></Page>} />
                         <Route path='/admin/regions/edit/:id' render={props => <Page><RegionForm id={props.match.params.id} /></Page>} />
