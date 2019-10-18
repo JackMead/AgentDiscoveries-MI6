@@ -7,9 +7,14 @@ import Page from './page';
 import Profile from './profile/profile';
 import EditProfilePicture from './profile/edit-profile-picture';
 import EditProfileCallSign from './profile/edit-profile-callsign';
+import EditProfileUsernamePassword from './profile/edit-profile-username-password';
 
 import LocationReportSearch from './search-forms/search-location-reports';
 import RegionSummarySearch from './search-forms/search-region-summaries';
+
+import AgentLocationReports from './search-forms/agent-location-reports';
+import AgentRegionSummaries from './search-forms/agent-region-summaries';
+
 import LocationReportSubmit from './submit-forms/submit-location-report';
 import RegionSummarySubmit from './submit-forms/submit-region-summary';
 import UsersTable from './admin/users-table';
@@ -21,7 +26,6 @@ import LocationForm from './admin/location-form';
 import RegionForm from './admin/region-form';
 import UserForm from './admin/user-form';
 import Error from './error';
-import YoutubeBackground from 'react-youtube-background';
 
 import { checkToken } from './utilities/request-helper';
 
@@ -34,7 +38,6 @@ export default class App extends React.Component {
         let newVideoId = videoIds[Math.floor(Math.random()*videoIds.length)];;
 
         return (
-            <YoutubeBackground videoId={newVideoId} >
                 <React.Fragment>
                     <Router>
                         <Switch>
@@ -50,6 +53,9 @@ export default class App extends React.Component {
                             <Route path='/admin/users' exact render={() => <Page><UsersTable/></Page>} />
                             <Route path='/admin/decode' exact render={() => <Page><DecodeEnemyMessageForm/></Page>} />
 
+                            <Route path='/myreports/location' render={() => <Page><AgentLocationReports /></Page>} />
+                            <Route path='/myreports/region' render={() => <Page><AgentRegionSummaries /></Page>} />
+
                             <Route path='/admin/locations/add' render={() => <Page><LocationForm/></Page>} />
                             <Route path='/admin/regions/add' render={() => <Page><RegionForm/></Page>} />
                             <Route path='/admin/users/add' render={() => <Page><UserForm/></Page>} />
@@ -62,13 +68,13 @@ export default class App extends React.Component {
                             <Route path='/profile' exact render={() => <Page><Profile /></Page>} />
                             <Route path='/profile/edit/callsign' render={() => <Page><EditProfileCallSign /></Page>} />
                             <Route path='/profile/edit/picture' render={() => <Page><EditProfilePicture /></Page>} />
+                            <Route path='/profile/edit/credentials' render={() => <Page><EditProfileUsernamePassword /></Page>} />
 
                             <Route path='/error' render={() => <Page><Error/></Page>}/>
                             <Route render={() => <Page><Error/></Page>}/>
                         </Switch>
                     </Router>
                 </React.Fragment>
-            </YoutubeBackground>
         );
     }
 }
