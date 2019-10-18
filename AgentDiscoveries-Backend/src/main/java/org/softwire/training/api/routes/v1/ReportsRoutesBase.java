@@ -98,7 +98,7 @@ public abstract class ReportsRoutesBase<T extends ReportApiModelBase, U extends 
     }
 
     public List<T> searchReports(Request req, Response res) {
-        permissionsVerifier.verifyAdminPermission(req);
+        permissionsVerifier.verifyIsAdminOrAgent(req);
 
         return reportsDao.searchReports(parseSearchCriteria(req))
                 .stream()
