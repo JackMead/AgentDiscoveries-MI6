@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import {clearUserInfo, isAdmin, isAgent, isLoggedIn} from './utilities/user-helper';
 import logo from '../../static/agent.png';
 import {apiGet} from './utilities/request-helper';
-import EditProfilePicture from './profile/edit-profile-picture';
 import placeholderPicture from '../../static/placeholder.jpg';
 import {currentUserId} from './utilities/user-helper';
 import {errorLogAndRedirect} from './error';
@@ -89,7 +88,7 @@ export default class NavigationBar extends React.Component {
         this.setState({
             imgSrc: '',
             user: {}
-        })
+        });
     }
 
     render() {
@@ -141,25 +140,25 @@ export default class NavigationBar extends React.Component {
     renderAdminOptions() {
         return (
             <Nav>
-                <NavDropdown eventKey={"admin"} title='Admin' id='basic-nav-dropdown'>
-                    <MenuItem componentClass={Link} href='/admin/locations' to='/admin/locations' eventKey={"admin-locations"}>
+                <NavDropdown eventKey={'admin'} title='Admin' id='basic-nav-dropdown'>
+                    <MenuItem componentClass={Link} href='/admin/locations' to='/admin/locations' eventKey={'admin-locations'}>
                         Locations
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/admin/regions' to='/admin/regions' eventKey={"admin-regions"}>
+                    <MenuItem componentClass={Link} href='/admin/regions' to='/admin/regions' eventKey={'admin-regions'}>
                         Regions
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/admin/users' to='/admin/users' eventKey={"admin-users"}>
+                    <MenuItem componentClass={Link} href='/admin/users' to='/admin/users' eventKey={'admin-users'}>
                         Users
                     </MenuItem>
                     <MenuItem componentClass={Link} href='/admin/decode' to='/admin/decode' eventKey={2.4}>
                         Decode
                     </MenuItem>
                 </NavDropdown>
-                <NavDropdown eventKey={"search"} title='Search' id='basic-nav-dropdown'>
-                    <MenuItem componentClass={Link} href='/search/location' to='/search/location' eventKey={"search-location"}>
+                <NavDropdown eventKey={'search'} title='Search' id='basic-nav-dropdown'>
+                    <MenuItem componentClass={Link} href='/search/location' to='/search/location' eventKey={'search-location'}>
                         Location Reports
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/search/region' to='/search/region' eventKey={"search-region"}>
+                    <MenuItem componentClass={Link} href='/search/region' to='/search/region' eventKey={'search-region'}>
                         Region Summaries
                     </MenuItem>
                 </NavDropdown>
@@ -170,19 +169,19 @@ export default class NavigationBar extends React.Component {
     renderAgentOptions() {
         return (
             <React.Fragment>
-                <NavDropdown eventKey={"submit"} title='Submit' id='basic-nav-dropdown'>
-                    <MenuItem componentClass={Link} href='/submit/location' to='/submit/location' eventKey={"submit-location"}>
+                <NavDropdown eventKey={'submit'} title='Submit' id='basic-nav-dropdown'>
+                    <MenuItem componentClass={Link} href='/submit/location' to='/submit/location' eventKey={'submit-location'}>
                         Location Report
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/submit/region' to='/submit/region' eventKey={"submit-region"}>
+                    <MenuItem componentClass={Link} href='/submit/region' to='/submit/region' eventKey={'submit-region'}>
                         Region Summary
                     </MenuItem>
                 </NavDropdown>
-                <NavDropdown eventKey={"my-reports"} title='My Reports' id='basic-nav-dropdown'>
-                    <MenuItem componentClass={Link} href='/myreports/location' to='/myreports/location' eventKey={"my-reports-location"}>
+                <NavDropdown eventKey={'my-reports'} title='My Reports' id='basic-nav-dropdown'>
+                    <MenuItem componentClass={Link} href='/myreports/location' to='/myreports/location' eventKey={'my-reports-location'}>
                          Location Reports
                     </MenuItem>
-                    <MenuItem componentClass={Link} href='/myreports/region' to='/myreports/region' eventKey={"my-reports-region"}>
+                    <MenuItem componentClass={Link} href='/myreports/region' to='/myreports/region' eventKey={'my-reports-region'}>
                          Region Summaries
                     </MenuItem>
                 </NavDropdown>
@@ -194,7 +193,7 @@ export default class NavigationBar extends React.Component {
         return (
             <Navbar.Collapse>
                 <Nav pullRight>
-                    <NavItem componentClass={Link} href='/login' to='/login' eventKey={"login"}>
+                    <NavItem componentClass={Link} href='/login' to='/login' eventKey={'login'}>
                         Login
                     </NavItem>
                 </Nav>
