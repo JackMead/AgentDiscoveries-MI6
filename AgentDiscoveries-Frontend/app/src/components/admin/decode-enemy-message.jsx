@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Button, ControlLabel, Form, FormControl, FormGroup} from 'react-bootstrap';
 import {apiPost} from '../utilities/request-helper';
-import Message from '../message';
 
 export default class DecodeEnemyMessageForm extends React.Component {
     constructor(props) {
@@ -18,12 +17,10 @@ export default class DecodeEnemyMessageForm extends React.Component {
 
     render() {
         return (
-            <div className='col-md-8 col-md-offset-2'>
-                <Message message={this.state.message} />
+            <React.Fragment>
                 <div className='col-md-12'>
                     <Form onSubmit={this.onSubmit}>
                         <h3>Decode Enemy Message</h3>
-
                         <FormGroup>
                             <ControlLabel>Enemy message</ControlLabel>
                             <FormControl type='text' required
@@ -33,10 +30,16 @@ export default class DecodeEnemyMessageForm extends React.Component {
                                 onChange={this.onEnemyMessageUpdate}
                                 id='enemy-message'/>
                         </FormGroup>
-                        <Button type='submit'>Submit</Button>
+                        <Button id="decode-button" type='submit'>Decode</Button>
                     </Form>
+                    <div id='code-result'>
+                        <br />
+                        {this.state.result ? <h3>Result: </h3> : ''}
+                        <h4>{this.state.result}</h4>
+                    </div>
                 </div>
-            </div>
+            </React.Fragment>
+
         );
     }
 
@@ -54,8 +57,7 @@ export default class DecodeEnemyMessageForm extends React.Component {
         const request = apiPost('decodemessage/enemy', body);
 
         request
-            .then(result => this.setState({ message: { message: result.message, type: 'success'} }))
-            .catch(error => this.setState({ message: { message: error.message, type: 'danger' } }));
+            .then(response => this.setState({ result: response.message }))
+            .catch(error => this.setState({ result: error.message }));
     }
-
 }
