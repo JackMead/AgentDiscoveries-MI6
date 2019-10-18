@@ -14,8 +14,8 @@ export default class RegionSummariesSearch extends React.Component {
         this.state = {
             regionId: '',
             agentId: '',
-            fromTime: '',
-            toTime: '',
+            fromTime: moment().subtract(7, 'days').format('YYYY-MM-DD'),
+            toTime: moment().format('YYYY-MM-DD'),
             reportTitle: '',
             regions: [],
             agents: [],

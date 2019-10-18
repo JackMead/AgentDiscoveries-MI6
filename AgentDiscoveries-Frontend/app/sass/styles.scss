@@ -34,6 +34,19 @@ body {
             color: $main-color;
         }
     }
+    .navbar-right {
+        position: relative;
+    }
+    .nav-avatar {
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
+        position: absolute;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+        left: -30px;
+    }
 }
 
 .dropdown-menu {

@@ -85,10 +85,9 @@ export default class SearchResult extends React.Component {
         for( let i = 0; i < this.props.results.length; i++ ) {
             rows.push(Object.values(this.props.results[i]));
         }
-
         doc.autoTable(col, rows, { startY: 10 });
         const date = new Date();
-        let result = date.getHours() < 12 ? 'Reports - ' + date.getHours() + '.' + date.getMinutes() + 'am.pdf'
+        const result = date.getHours() < 12 ? 'Reports - ' + date.getHours() + '.' + date.getMinutes() + 'am.pdf'
             : 'Reports - ' + date.getHours() + '.' + date.getMinutes() + 'pm.pdf';
         doc.save(result);
     }
