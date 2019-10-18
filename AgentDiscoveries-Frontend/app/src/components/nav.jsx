@@ -3,6 +3,11 @@ import {MenuItem, Nav, Navbar, NavDropdown, NavItem} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import {clearUserInfo, isAdmin, isAgent, isLoggedIn} from './utilities/user-helper';
 import logo from '../../static/agent.png';
+import {apiGet} from './utilities/request-helper';
+import EditProfilePicture from './profile/edit-profile-picture';
+import placeholderPicture from '../../static/placeholder.jpg';
+import {currentUserId} from './utilities/user-helper';
+import {errorLogAndRedirect} from './error';
 
 export default class NavigationBar extends React.Component {
     constructor(props) {
@@ -11,19 +16,29 @@ export default class NavigationBar extends React.Component {
         this.state = {
             isLoggedIn: isLoggedIn(),
             isAdmin: isAdmin(),
-            isAgent: isAgent()
+            isAgent: isAgent(),
+            imgSrc: placeholderPicture,
+            user: {}
         };
 
+        this.getProfilePicture = this.getProfilePicture.bind(this);
         this.onLoginEvent = this.onLoginEvent.bind(this);
+        this.onPictureEvent = this.onPictureEvent.bind(this);
         this.handleLogOut = this.handleLogOut.bind(this);
     }
 
     componentDidMount() {
         window.addEventListener('login', this.onLoginEvent);
+        window.addEventListener('picture', this.onPictureEvent);
+    }
+
+    componentWillMount() {
+        this.refreshUser();
     }
 
     componentWillUnmount() {
         window.removeEventListener('login', this.onLoginEvent);
+        window.removeEventListener('picture', this.onPictureEvent);
     }
 
     onLoginEvent() {
@@ -32,6 +47,49 @@ export default class NavigationBar extends React.Component {
             isAdmin: isAdmin(),
             isAgent: isAgent()
         });
+        if( isLoggedIn() ) {
+            this.refreshUser();
+        } else {
+            this.clearUser();
+        }
+    }
+
+    onPictureEvent() {
+        this.getProfilePicture();
+    }
+
+    getProfilePicture() {
+        apiGet('pictures', currentUserId())
+            .then(response => response.blob())
+            .then(blob => this.setState({imgSrc: URL.createObjectURL(blob)}))
+            .catch(error => {
+                if (error.response && error.response.status === 404) {
+                    this.setState({ imgSrc: placeholderPicture });
+                } else {
+                    throw error;
+                }
+            })
+            .catch(errorLogAndRedirect);
+    }
+
+    getUser() {
+        apiGet('users', currentUserId())
+            .then(user => {
+                this.setState({ user: user });
+            })
+            .catch(errorLogAndRedirect);
+    }
+
+    refreshUser() {
+        this.getProfilePicture();
+        this.getUser();
+    }
+
+    clearUser() {
+        this.setState({
+            imgSrc: '',
+            user: {}
+        })
     }
 
     render() {
@@ -66,12 +124,15 @@ export default class NavigationBar extends React.Component {
                     </NavItem>
                 </Nav>
                 <Nav pullRight>
-                    <NavItem componentClass={Link} href='/profile' to='/profile' eventKey={6}>
-                        Profile
-                    </NavItem>
-                    <NavItem id="logout-link" onClick={this.handleLogOut} href='/login' to='/login' eventKey={1}>
-                        Log Out
-                    </NavItem>
+                    <img className="nav-avatar" src={this.state.imgSrc} />
+                    <NavDropdown eventKey={2} title={this.state.user.username} id="basic-nav-dropdown">
+                        <MenuItem componentClass={Link} href="/profile" to="/profile" eventKey={6}>
+                            Edit Profile
+                        </MenuItem>
+                        <NavItem id="logout-link" onClick={this.handleLogOut} href='/login' to='/login' eventKey={1}>
+                            Log Out
+                        </NavItem>
+                    </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
         );
