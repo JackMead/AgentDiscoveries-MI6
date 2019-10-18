@@ -90,6 +90,9 @@ export default class NavigationBar extends React.Component {
                     <MenuItem componentClass={Link} href='/admin/users' to='/admin/users' eventKey={"admin-users"}>
                         Users
                     </MenuItem>
+                    <MenuItem componentClass={Link} href='/admin/decode' to='/admin/decode' eventKey={2.4}>
+                        Decode
+                    </MenuItem>
                 </NavDropdown>
                 <NavDropdown eventKey={"search"} title='Search' id='basic-nav-dropdown'>
                     <MenuItem componentClass={Link} href='/search/location' to='/search/location' eventKey={"search-location"}>
