@@ -41,7 +41,7 @@
     "jspdf": "^1.4.1",
     "jspdf-autotable": "^3.2.5",
     "moment": "^2.22.1",
-    "moment-timezone": "^0.5.26",
+    "moment-timezone": "^0.5.35",
     "query-string": "^6.1.0",
     "react": "^16.10.2",
     "react-bootstrap": "^0.32.1",
